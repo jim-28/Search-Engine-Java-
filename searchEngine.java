@@ -93,7 +93,40 @@ public class searchEngine {
     */
     void computePageRanks() {
 	/* WRITE YOUR CODE HERE */
-	
+    	//Initialize the values of all vertices
+    	Iterator<String> i = internet.getVertices().iterator();
+    	while(i.hasNext()){
+    		String vertex = i.next();
+    		internet.setPageRank(vertex, 1);
+    	}
+    			//Iterate page-rank calculations 100 times for more accurate page-rankings (convergence)
+    	for(int y = 0; y<100; y++){
+    		//Get all vertices again
+    		Iterator<String> j = internet.getVertices().iterator();
+    		while(j.hasNext()){
+    			String vertex = j.next();
+    	
+    			double recursive = 0;
+    			//Get all edges to each vertex
+    			Iterator<String> k = internet.getEdgesInto(vertex).iterator();
+    			while(k.hasNext()){
+    				String edgeInto = k.next();
+    				//implement PR(v)= calculations
+    				recursive = recursive+(internet.getPageRank(edgeInto)/internet.getOutDegree(edgeInto));
+    				internet.setPageRank(vertex, recursive);
+    			}
+    			double pr = 0.5+0.5*internet.getPageRank(vertex);
+    			internet.setPageRank(vertex, pr);
+    		}
+    	}
+    
+    	//The following commented-out code is for DEBUGGING
+    /*	Iterator<String> l = internet.getVertices().iterator();
+    	while(l.hasNext()){
+    		String vertex = l.next();
+    	System.out.println(vertex+": "+internet.getPageRank(vertex));
+    	}         */
+ 
     } // end of computePageRanks
     
 	
@@ -106,8 +139,29 @@ public class searchEngine {
     */
     String getBestURL(String query) {
 	/* WRITE YOUR CODE HERE */
-
-	return null; // remove this
+    	
+    	//	HOW TO MAKE BESTURL & COMPARE GLOBAL WITHIN THIS METHOD??????
+    	String bestUrl = "";
+    	double compare = -10;
+    	//If the word is not in the wordIndex, it is not on any site
+    	if(wordIndex.get(query)==null){
+			return " ";
+		}
+    	
+    	//Go through each vertex's page-rank. The highest page-rank with the query is returned. 
+    	Iterator<String> i = internet.getVertices().iterator();
+    	while(i.hasNext()){
+    		String vertex = i.next();
+    		//Make sure the URL has the query word: if vertex is in wordIndex.get(query)
+    		if(wordIndex.get(query).contains(vertex)){
+    			//compare page-rankings
+    			if(internet.getPageRank(vertex)>compare){
+    				compare = internet.getPageRank(vertex);
+    				bestUrl = vertex;
+    			}
+    		}
+    	}
+	return bestUrl; // remove this
     } // end of getBestURL
     
     
