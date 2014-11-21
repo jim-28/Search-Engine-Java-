@@ -3,9 +3,6 @@ import java.util.*;
 import java.lang.*;
 import java.net.*;
 
-/* YOU SHOULD NOT NEED TO LOOK AT THIS CODE AT ALL.
-   BUT IT COULD BE INTERESTING FOR YOU TO SEE HOW IT WORKS. */
-
 // This class implements a simple parser for html documents
 public class htmlParsing {
     
@@ -20,9 +17,7 @@ public class htmlParsing {
        the links out of a given url. Only the the www.cs.mcgill.ca domain is 
        considered. Personnal web pages (those with URL containing "~") 
        are not considered. Only html links are considered. The given url
-       must contain the full path (implicit "index.html" are not allowed).
-       So "http://www.cs.mcgill.ca" is not a valid URL, but "http://www.cs.mcgill.ca/index.html"
-       is. */
+       must contain the full path (implicit "index.html" are not allowed). */
            
     static public LinkedList<String> getLinks(String url) throws Exception {
         BufferedReader myURL;
@@ -82,6 +77,7 @@ public class htmlParsing {
        must contain the full path (implicit "index.html" are not allowed).
        So "http://www.cs.mcgill.ca" is not a valid URL, but "http://www.cs.mcgill.ca/index.html"
        is. Words inside html tags are not considered. */
+    
     static public LinkedList<String> getContent(String url) throws Exception {
 	//        url = fixURL( url ).toLowerCase();
         // String filename = internetFilesLocation + directoryChar + url.replace(':','+').replace('/','+');
@@ -139,7 +135,7 @@ public class htmlParsing {
     } // end of getContent
 
     // Returns a fixed URL where /index.html is added if necessary
-    // You should not need to use this method
+    // No need to use this method
     static public String fixURL(String url) {
 	// replace %7e by ~
 	int i=url.indexOf("%7e");
@@ -175,7 +171,7 @@ public class htmlParsing {
 
     // Returns a LinkedList of URLs contained in the line.
     // If only partial URLs is present, domain is prepended
-    // You should not need to use this method
+    // No need to use this method
     static public LinkedList<String>  parseLine(String line, String domain) {
 
         String key = "a href=\"" ;
@@ -219,7 +215,7 @@ public class htmlParsing {
     }   // end of parseLine  
 
         // write the content of a URL to a file.
-        // You should not need to use this method
+        // No need to use this method
     static public void writeContent(String url) {
              url=url.toLowerCase();
              String fileurl="internetFiles"+directoryChar+url.replace('/','+').replace(':','+');

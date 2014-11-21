@@ -2,7 +2,7 @@ import java.util.*;
 
 class directedGraph {
     
-    /* The graph is stored in a hash table (called HashMap in Java).
+    /* The graph is stored in a hash table 
        The vertices are identified by a String, which is used as key in the
        hash table. The information associated to each vertex v is a LinkedList of
        Strings, describing all vertices that v links to v */
